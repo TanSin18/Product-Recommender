@@ -1,0 +1,119 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "product-recommender"
+version = "2.0.0"
+description = "A machine learning-based product recommendation system for e-commerce"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "TanSin18", email = "tansin18@users.noreply.github.com"}
+]
+keywords = ["machine-learning", "recommendation-system", "xgboost", "bigquery", "e-commerce"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = [
+    "google-api-core>=2.19.1",
+    "google-auth>=2.30.0",
+    "google-auth-oauthlib>=1.2.0",
+    "google-cloud-bigquery>=3.25.0",
+    "google-cloud-bigquery-storage>=2.25.0",
+    "google-cloud-core>=2.4.1",
+    "google-cloud-storage>=2.17.0",
+    "db-dtypes>=1.2.1",
+    "xgboost>=2.1.0",
+    "scikit-learn>=1.5.1",
+    "imbalanced-learn>=0.12.3",
+    "scipy>=1.13.1",
+    "pandas>=2.2.2",
+    "numpy>=1.26.4",
+    "pyarrow>=16.1.0",
+    "pandas-gbq>=0.23.1",
+    "matplotlib>=3.9.0",
+    "seaborn>=0.13.2",
+    "python-dateutil>=2.9.0",
+    "pytz>=2024.1",
+    "tqdm>=4.66.4",
+    "joblib>=1.4.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ipython>=8.26.0",
+    "ipykernel>=6.29.4",
+    "jupyter>=1.0.0",
+    "notebook>=7.2.1",
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "black>=24.0.0",
+    "flake8>=7.0.0",
+    "mypy>=1.8.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/TanSin18/Product-Recommender"
+Repository = "https://github.com/TanSin18/Product-Recommender"
+Issues = "https://github.com/TanSin18/Product-Recommender/issues"
+
+[project.scripts]
+train-recommender = "Train.training:main"
+score-recommender = "Score.score:main"
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip_gitignore = true
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q --cov=. --cov-report=html --cov-report=term"
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+
+[tool.coverage.run]
+source = ["Inactive_Customers"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
